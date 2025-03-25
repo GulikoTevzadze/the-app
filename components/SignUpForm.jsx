@@ -43,7 +43,7 @@ export default function SignUpForm() {
 
       toast.success("Account created successfully! Please log in.");
       console.log("Attempting to navigate");
-      router.push("/?tab=sign-in");
+      router.push("/?tab=sign-in")
     } catch (error) {
       console.error("Full sign up error:", error);
       toast.error(error.message || "Registration failed");
