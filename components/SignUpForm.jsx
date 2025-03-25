@@ -24,6 +24,7 @@ export default function SignUpForm() {
   const onHandleSubmit = async (data) => {
     setIsLoading(true);
     try {
+      console.log("Submitting data:", data);
       const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -32,16 +33,19 @@ export default function SignUpForm() {
         body: JSON.stringify(data),
       });
 
+      console.log("Response status:", response.status);
       const result = await response.json();
+      console.log("Response result:", result);
 
       if (!response.ok) {
         throw new Error(result.error || "Failed to sign up");
       }
 
       toast.success("Account created successfully! Please log in.");
+      console.log("Attempting to navigate");
       router.push("/?tab=sign-in");
     } catch (error) {
-      console.error("Sign up error:", error);
+      console.error("Full sign up error:", error);
       toast.error(error.message || "Registration failed");
     } finally {
       setIsLoading(false);

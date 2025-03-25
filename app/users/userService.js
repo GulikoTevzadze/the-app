@@ -59,3 +59,4 @@ export async function updateUsersStatus(ids, status) {
     throw error;
   }
 }
+
