@@ -25,6 +25,10 @@ export async function deleteUsers(ids) {
       },
       body: JSON.stringify({ ids }),
     });
+    if (response.redirected) {
+      console.log('redirected')
+      window.location.href = response.url;
+    }
 
     if (!response.ok) throw new Error("Failed to delete users");
 
@@ -46,6 +50,10 @@ export async function updateUsersStatus(ids, status) {
       },
       body: JSON.stringify({ ids, status }),
     });
+    if (response.redirected) {
+      console.log('redirected')
+      window.location.href = response.url;
+    }
 
     if (!response.ok) throw new Error(`Failed to ${status.toLowerCase()} users`);
 

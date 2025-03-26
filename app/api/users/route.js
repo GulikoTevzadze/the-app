@@ -57,6 +57,16 @@ export async function GET(request) {
 }
 
 export async function DELETE(request) {
+  const userId = request.headers.get("user-id")
+
+  try {
+    const user = await checkUserStatus(userId)
+    if (!user || user.status === 'BLOCKED') {
+      return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_SITE_URL), 302)
+    }
+  } catch (error) {
+    return NextResponse.redirect(new URL("/", process.env.NEXT_PUBLIC_SITE_URL), 302);
+  }
   try {
     const { ids } = await request.json();
     const users = await prisma.user.deleteMany({
@@ -83,6 +93,16 @@ export async function DELETE(request) {
 }
 
 export async function PATCH(request) {
+  const userId = request.headers.get("user-id")
+
+  try {
+    const user = await checkUserStatus(userId)
+    if (!user || user.status === 'BLOCKED') {
+      return NextResponse.redirect(new URL('/', process.env.NEXT_PUBLIC_SITE_URL), 302)
+    }
+  } catch (error) {
+    return NextResponse.redirect(new URL("/", process.env.NEXT_PUBLIC_SITE_URL), 302);
+  }
   try {
     const { ids, status } = await request.json();
     const users = await prisma.user.updateMany({

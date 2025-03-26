@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import SignInForm from "@/components/SignInForm";
 import SignUpForm from "@/components/SignUpForm";
-import { useSearchParams } from "next/navigation";
 import { Toaster } from "sonner";
 
 export default function Page() {
